@@ -1,3 +1,7 @@
+if exists(':GuiFont')
+	GuiFont! JetBrains Mono:h12 
+endif
+
 :set number
 :set relativenumber
 :set autoindent
@@ -23,6 +27,8 @@ Plug 'ryanoasis/vim-devicons' " https://github.com/ryanoasis/vim-devicons + http
 Plug 'mkitt/tabline.vim' " https://github.com/mkitt/tabline.vim
 Plug 'rafi/awesome-vim-colorschemes' " https://github.com/rafi/awesome-vim-colorschemes 
 Plug 'tribela/vim-transparent'
+Plug 'LunarVim/Colorschemes'
+Plug 'kien/ctrlp.vim'
 
 " Go plug
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -34,7 +40,7 @@ call plug#end()
 " open NERDTree
 autocmd VimEnter * NERDTree
 
-:colorscheme PaperColor
+:colorscheme onehalfdark 
 
 " map split nav
 map <C-h> <C-w>h
