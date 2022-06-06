@@ -3,7 +3,7 @@ if exists(':GuiFont')
 endif
 
 set number
-set relativenumber
+" set relativenumber
 set autoindent
 set tabstop=4
 set shiftwidth=4
@@ -100,7 +100,9 @@ let g:NERDTreeDirArrowExpandable="+"
 let g:NERDTreeDirArrowCollapsible="-"
 
 " config icons collors
-let s:lblue ="0bebe0"
+let s:goColor ="8EE3E4"
+let s:shellColor ="1be85c"
 
 let g:NERDTreeExtensionHighlightColor = {} " this line is needed to avoid error
-let g:NERDTreeExtensionHighlightColor['go'] = s:lblue 
+let g:NERDTreeExtensionHighlightColor['go'] = s:goColor
+let g:NERDTreeExtensionHighlightColor['sh'] = s:shellColor
