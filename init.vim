@@ -77,7 +77,8 @@ map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 
-"Nerd tree config 
+"Nerd tree config
+nnoremap <S-r> :NERDTreeRefreshRoot<CR>
 nnoremap <S-n><S-f> :NERDTreeFocus<CR>
 nnoremap <S-n><S-t> :NERDTreeToggle<CR>
 nnoremap <S-n><S-c> :NERDTreeClose<CR>
