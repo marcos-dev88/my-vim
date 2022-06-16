@@ -111,8 +111,8 @@ let g:NERDTreeExtensionHighlightColor['sh'] = s:shellColor
 " config tabs
 
 " move previous
-map <A-,> gt
+map <A-,> gT
 " move next
-map <A-.> gT
+map <A-.> gt
 
 :map <A-c> :tabclose<CR>
