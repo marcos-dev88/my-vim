@@ -1,7 +1,5 @@
-if exists(':GuiFont')
-	GuiFont! JetBrains Mono:h12 
-endif
 
+set guifont
 set number
 " set relativenumber
 set autoindent
