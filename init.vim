@@ -3,6 +3,8 @@ set guifont
 set number
 " set relativenumber
 set autoindent
+:set smartindent
+:set expandtab
 set tabstop=4
 set shiftwidth=4
 set smarttab 
@@ -41,6 +43,7 @@ Plug 'LunarVim/Colorschemes'
 Plug 'kien/ctrlp.vim'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ludovicchabant/vim-gutentags'
 
 " Go plug
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
