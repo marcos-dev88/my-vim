@@ -81,7 +81,7 @@ nnoremap <S-r> :NERDTreeRefreshRoot<CR>
 nnoremap <S-n><S-f> :NERDTreeFocus<CR>
 nnoremap <S-n><S-t> :NERDTreeToggle<CR>
 nnoremap <S-n><S-c> :NERDTreeClose<CR>
-nnoremap <S-n> :NERDTree<CR>
+nnoremap <S-t> :NERDTree<CR>
 " open NERDTree
 autocmd VimEnter * NERDTree
 
@@ -108,6 +108,9 @@ let s:shellColor ="1be85c"
 let g:NERDTreeExtensionHighlightColor = {} " this line is needed to avoid error
 let g:NERDTreeExtensionHighlightColor['go'] = s:goColor
 let g:NERDTreeExtensionHighlightColor['sh'] = s:shellColor
+
+" config navigation search
+nnoremap <A-k> :nohls<CR>
 
 " config tabs
 
