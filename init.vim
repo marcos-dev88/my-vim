@@ -57,7 +57,7 @@ Plug 'tpope/vim-rhubarb'
 
 call plug#end()
 
-:colorscheme onehalfdark 
+:colorscheme molokai 
 
 " Use <c-space> to autocomplete suggestion
 if has('nvim')
