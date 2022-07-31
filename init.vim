@@ -5,10 +5,7 @@ set number
 set autoindent
 :set smartindent
 :set expandtab
-set tabstop=4
-set shiftwidth=4
 set smarttab 
-set softtabstop=4
 set updatetime=100
 set listchars+=trail:-
 set scrolloff=10
@@ -21,6 +18,16 @@ filetype on
 filetype plugin on
 filetype indent on
 set sessionoptions+=globals
+
+"tab config
+set expandtab
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+nnoremap <Tab> >>_
+nnoremap <S-Tab> <<_
+vmap <S-Tab>  mm<`m:<C-U>exec "normal ".&shiftwidth."h"<CR>mmgv`m
+vmap <Tab>    mm>`m:<C-U>exec "normal ".&shiftwidth."l"<CR>mmgv`m
 
 " for transparent bg
 let g:transparent_enabled="true"
