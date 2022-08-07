@@ -80,13 +80,26 @@ return require('packer').startup(function()
     use {
       'neoclide/coc.nvim', 
       branch = 'release',
+
       cmd([[
-      	if has('nvim')
-		inoremap <silent><expr> <c-space> coc#refresh()
-	else
-		inoremap <silent><expr> <c-@> coc#refresh()
-	endif
-	]])
+        set number
+
+        " tab config
+        set expandtab
+        set shiftwidth=4
+        set softtabstop=4
+        set tabstop=4
+        nnoremap <Tab> >>_
+        nnoremap <S-Tab> <<_
+        vmap <S-Tab>  mm<`m:<C-U>exec "normal ".&shiftwidth."h"<CR>mmgv`m
+        vmap <Tab>    mm>`m:<C-U>exec "normal ".&shiftwidth."l"<CR>mmgv`m
+
+        if has('nvim')
+            inoremap <silent><expr> <c-space> coc#refresh()
+        else
+            inoremap <silent><expr> <c-@> coc#refresh()
+        endif
+      ]])
     }
 
     use 'SirVer/ultisnips' -- https://github.com/sirver/UtiSnips
