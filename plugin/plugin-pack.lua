@@ -49,8 +49,8 @@ return require('packer').startup(function()
           \ 'Unknown'   :'?',
           \ }
 
-        let g:NERDTreeDirArrowExpandable="+"
-        let g:NERDTreeDirArrowCollapsible="-"
+        let g:NERDTreeDirArrowExpandable="▶"
+        let g:NERDTreeDirArrowCollapsible="▼"
 
         " config icons collors
         let s:goColor ="8EE3E4"
