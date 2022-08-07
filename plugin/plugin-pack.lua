@@ -80,7 +80,13 @@ return require('packer').startup(function()
     use {
       'neoclide/coc.nvim', 
       branch = 'release',
-	    vim.keymap.set('i', '<c-space>', vim.fn['coc#refresh'])
+      cmd([[
+      	if has('nvim')
+		inoremap <silent><expr> <c-space> coc#refresh()
+	else
+		inoremap <silent><expr> <c-@> coc#refresh()
+	endif
+	]])
     }
 
     use 'SirVer/ultisnips' -- https://github.com/sirver/UtiSnips
