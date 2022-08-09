@@ -82,18 +82,6 @@ return require('packer').startup(function()
       branch = 'release',
 
       cmd([[
-        set number
-
-        " tab config
-        set expandtab
-        set shiftwidth=4
-        set softtabstop=4
-        set tabstop=4
-        nnoremap <Tab> >>_
-        nnoremap <S-Tab> <<_
-        vmap <S-Tab>  mm<`m:<C-U>exec "normal ".&shiftwidth."h"<CR>mmgv`m
-        vmap <Tab>    mm>`m:<C-U>exec "normal ".&shiftwidth."l"<CR>mmgv`m
-
         if has('nvim')
             inoremap <silent><expr> <c-space> coc#refresh()
         else
