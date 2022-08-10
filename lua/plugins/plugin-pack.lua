@@ -70,7 +70,7 @@ return require('packer').startup(function()
     use 'tiagofumo/vim-nerdtree-syntax-highlight'
     use 'Xuyuanp/nerdtree-git-plugin'
     use 'ludovicchabant/vim-gutentags'
-
+    use 'vimcolorschemes/vimcolorschemes'
     -- Go plug
     use {
       'fatih/vim-go', 
@@ -98,7 +98,7 @@ return require('packer').startup(function()
     use 'tpope/vim-rhubarb'
   
     -- Def colorscheme
-    cmd([[:colorscheme one]])
+    cmd([[:colorscheme dogrun]])
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
