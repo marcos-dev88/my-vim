@@ -62,7 +62,6 @@ return require('packer').startup(function()
         let g:NERDTreeExtensionHighlightColor['sh'] = s:shellColor
         let g:NERDTreeExtensionHighlightColor['lua'] = s:luaColor
       ]]),
-      cmd([[autocmd VimEnter * NERDTree]])
     }
     use 'tpope/vim-commentary' -- https://github.com/tpope/vim-commentary
     use 'mkitt/tabline.vim' -- https://github.com/mkitt/tabline.vim
@@ -98,7 +97,7 @@ return require('packer').startup(function()
     use 'tpope/vim-rhubarb'
   
     -- Def colorscheme
-    cmd([[:colorscheme dogrun]])
+    cmd([[:colorscheme onehalfdark]])
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
