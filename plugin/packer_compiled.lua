@@ -99,10 +99,25 @@ _G.packer_plugins = {
     path = "/home/marcos_dev/.local/share/nvim/site/pack/packer/start/nerdtree-git-plugin",
     url = "https://github.com/Xuyuanp/nerdtree-git-plugin"
   },
+  ["palenightfall.nvim"] = {
+    loaded = true,
+    path = "/home/marcos_dev/.local/share/nvim/site/pack/packer/start/palenightfall.nvim",
+    url = "https://github.com/JoosepAlviste/palenightfall.nvim"
+  },
+  ["plenary.nvim"] = {
+    loaded = true,
+    path = "/home/marcos_dev/.local/share/nvim/site/pack/packer/start/plenary.nvim",
+    url = "https://github.com/nvim-lua/plenary.nvim"
+  },
   ["tabline.vim"] = {
     loaded = true,
     path = "/home/marcos_dev/.local/share/nvim/site/pack/packer/start/tabline.vim",
     url = "https://github.com/mkitt/tabline.vim"
+  },
+  ["telescope.nvim"] = {
+    loaded = true,
+    path = "/home/marcos_dev/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+    url = "https://github.com/nvim-telescope/telescope.nvim"
   },
   ultisnips = {
     loaded = true,

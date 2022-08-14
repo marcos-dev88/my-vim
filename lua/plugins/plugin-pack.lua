@@ -23,6 +23,7 @@ return require('packer').startup(function()
     use 'ryanoasis/vim-devicons' -- https://github.com/ryanoasis/vim-devicons + https://github.com/ryanoasis/nerd-fonts/
     use 'rafi/awesome-vim-colorschemes' -- https://github.com/rafi/awesome-vim-colorschemes 
     use 'LunarVim/Colorschemes'
+    use 'JoosepAlviste/palenightfall.nvim'
     use 'tribela/vim-transparent'
     use {
       'preservim/nerdtree', -- https://github.com/preservim/nerdtree
@@ -63,6 +64,11 @@ return require('packer').startup(function()
         let g:NERDTreeExtensionHighlightColor['lua'] = s:luaColor
       ]]),
     }
+    use {
+        'nvim-telescope/telescope.nvim',
+        requires = { {'nvim-lua/plenary.nvim'} }
+    }
+
     use 'tpope/vim-commentary' -- https://github.com/tpope/vim-commentary
     use 'mkitt/tabline.vim' -- https://github.com/mkitt/tabline.vim
     use 'kien/ctrlp.vim'
@@ -97,8 +103,8 @@ return require('packer').startup(function()
     use 'tpope/vim-rhubarb'
   
     -- Def colorscheme
-    cmd([[:colorscheme onehalfdark]])
-
+    require('palenightfall').setup()
+    
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
     if packer_bootstrap then
