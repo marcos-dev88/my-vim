@@ -87,7 +87,7 @@ _G.packer_plugins = {
   ["ctrlp.vim"] = {
     loaded = true,
     path = "/home/marcos_dev/.local/share/nvim/site/pack/packer/start/ctrlp.vim",
-    url = "https://github.com/kien/ctrlp.vim"
+    url = "https://github.com/ctrlpvim/ctrlp.vim"
   },
   nerdtree = {
     loaded = true,

@@ -26,6 +26,16 @@ return require('packer').startup(function()
     use 'JoosepAlviste/palenightfall.nvim'
     use 'tribela/vim-transparent'
     use {
+        'ctrlpvim/ctrlp.vim',
+        cmd([[
+            let g:ctrlp_map = '<c-p>'
+            let g:ctrlp_cmd = 'CtrlP :pwd'
+            let g:ctrlp_working_path_mode = 'ra'
+            let g:ctrlp_switch_buffer = 'et'
+            let g:ctrlp_show_hidden = 1
+        ]])
+    }
+    use {
       'preservim/nerdtree', -- https://github.com/preservim/nerdtree
       keymap('n', '<S-r>', ':NERDTreeRefreshRoot<CR>', noremap_opts),
       keymap('n', '<S-n><S-f>', ':NERDTreeFocus<CR>', noremap_opts),
