@@ -7,3 +7,4 @@ Most used coc plugin extension:
 * coc-git;
 * coc-xml;
 * coc-go;
+* coc-clangd;
