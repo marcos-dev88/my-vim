@@ -5,6 +5,10 @@ local g = vim.g
 -- opt.filetype.plugin
 vim.cmd([[ set sessionoptions+=globals ]])
 vim.cmd([[ set listchars+=trail:- ]])
+vim.cmd([[ 
+    set clipboard+=unnamedplus
+    set mouse=a
+]])
 opt.guifont = { "JetBrains Mono", "h12" } 
 opt.number = true
 opt.smartindent = true
