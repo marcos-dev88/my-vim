@@ -3,9 +3,10 @@ local opt = vim.opt
 local g = vim.g
 -- opt.filetype
 -- opt.filetype.plugin
-vim.cmd([[ set sessionoptions+=globals ]])
-vim.cmd([[ set listchars+=trail:- ]])
 vim.cmd([[ 
+    let mapleader = ","
+    set listchars+=trail:-
+    set sessionoptions+=globals
     set clipboard+=unnamedplus
     set mouse=a
 ]])

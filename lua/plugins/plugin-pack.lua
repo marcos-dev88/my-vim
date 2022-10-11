@@ -25,17 +25,17 @@ return require('packer').startup(function()
     use 'LunarVim/Colorschemes'
     use 'JoosepAlviste/palenightfall.nvim'
     use 'tribela/vim-transparent'
-    use {
-        'ctrlpvim/ctrlp.vim',
-        cmd([[
-            let g:ctrlp_map = '<c-p>'
-            let g:ctrlp_cmd = 'CtrlP :pwd'
-            let g:ctrlp_working_path_mode = 'ra'
-            let g:ctrlp_switch_buffer = 'et'
-            let g:ctrlp_show_hidden = 1
-        ]])
-    }
     -- use {
+    --     'ctrlpvim/ctrlp.vim',
+    --     cmd([[
+    --         let g:ctrlp_map = '<c-p>'
+    --         let g:ctrlp_cmd = 'CtrlP :pwd'
+    --         let g:ctrlp_working_path_mode = 'ra'
+    --         let g:ctrlp_switch_buffer = 'et'
+    --         let g:ctrlp_show_hidden = 1
+    --     ]])
+    -- }
+    -- -- use {
     --   'preservim/nerdtree', -- https://github.com/preservim/nerdtree
     --   keymap('n', '<S-r>', ':NERDTreeRefreshRoot<CR>', noremap_opts),
     --   keymap('n', '<S-n><S-f>', ':NERDTreeFocus<CR>', noremap_opts),
@@ -76,7 +76,8 @@ return require('packer').startup(function()
     -- }
     use {
         'nvim-telescope/telescope.nvim',
-        requires = { {'nvim-lua/plenary.nvim'} }
+        requires = { {'nvim-lua/plenary.nvim'} },
+        keymap('n', '<leader>f', '<cmd>Telescope find_files<CR>', noremap_opts)
     }
 
     use {
@@ -87,8 +88,8 @@ return require('packer').startup(function()
         keymap('v', '<A-/>', ':Commentary<CR>', {})
     }
     use 'mkitt/tabline.vim' -- https://github.com/mkitt/tabline.vim
-    use 'kien/ctrlp.vim'
-    use 'tiagofumo/vim-nerdtree-syntax-highlight'
+    -- use 'kien/ctrlp.vim'
+    -- use 'tiagofumo/vim-nerdtree-syntax-highlight'
     use 'Xuyuanp/nerdtree-git-plugin'
     use 'ludovicchabant/vim-gutentags'
     use 'vimcolorschemes/vimcolorschemes'
