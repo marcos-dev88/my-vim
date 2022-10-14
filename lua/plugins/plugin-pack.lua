@@ -77,7 +77,14 @@ return require('packer').startup(function()
     use {
         'nvim-telescope/telescope.nvim',
         requires = { {'nvim-lua/plenary.nvim'} },
-        keymap('n', '<leader>f', '<cmd>Telescope find_files<CR>', noremap_opts)
+        require("telescope").setup{
+            defaults = {
+                prompt_prefix = "⇻ ",
+                selection_caret = "⇢ ",
+                path_display = { "smart" },
+            }       
+        },
+        keymap('n', '<leader>f', '<cmd>Telescope find_files<CR>', noremap_opts),
     }
 
     use {
