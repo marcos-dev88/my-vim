@@ -24,3 +24,17 @@ keymap('v', '<C-s>', '<ESC>:w<CR>', {})
 
 -- select all
 keymap('n', '<C-a>', 'ggVG', noremap_opts)
+
+-- auto-complete dev sections
+cmd([[
+    inoremap " ""<left>
+    inoremap ' ''<left>
+    inoremap ` ``<left>
+]])
+
+keymap('i', '(', '()<left>', {})
+keymap('i', '[', '[]<left>', {})
+keymap('i', '{', '{}<left>', {})
+keymap('i', '{<CR>', '{<CR>}<ESC>0', {})
+keymap('i', '{;<CR>', '{<CR>};<ESC>0', {})
+keymap('i', '<', '<><left>', {})
