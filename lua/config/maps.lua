@@ -38,3 +38,6 @@ keymap('i', '{', '{}<left>', {})
 keymap('i', '{<CR>', '{<CR>}<ESC>0', {})
 keymap('i', '{;<CR>', '{<CR>};<ESC>0', {})
 keymap('i', '<', '<><left>', {})
+
+-- code folding mapping:
+keymap('n', '<space>', 'za', noremap_opts)
