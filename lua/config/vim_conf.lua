@@ -9,7 +9,12 @@ vim.cmd([[
     set sessionoptions+=globals
     set clipboard+=unnamedplus
     set mouse=a
+    set foldmethod=indent   
+    set foldnestmax=10
+    set nofoldenable
+    set foldlevel=2
 ]])
+
 opt.guifont = { "JetBrains Mono", "h12" } 
 opt.number = true
 opt.smartindent = true
