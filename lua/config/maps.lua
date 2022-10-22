@@ -41,3 +41,6 @@ keymap('i', '<', '<><left>', {})
 
 -- code folding mapping:
 keymap('n', '<space>', 'za', noremap_opts)
+
+-- copy to clipboard the realpath
+keymap('n', '<leader>p', ':r!realpath %<CR>dd<CR>', noremap_opts)
