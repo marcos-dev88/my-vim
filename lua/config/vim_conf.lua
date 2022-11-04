@@ -13,6 +13,9 @@ vim.cmd([[
     set foldnestmax=10
     set nofoldenable
     set foldlevel=2
+    set backspace=indent,eol,start
+    set softtabstop=4
+    set expandtab ts=4 sw=4 ai
 ]])
 
 opt.guifont = { "JetBrains Mono", "h12" } 

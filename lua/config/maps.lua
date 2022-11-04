@@ -4,11 +4,17 @@ local cmd = vim.cmd
 keymap('n', 'q', ':q<CR>', noremap_opts)
 -- tab config keymap
 cmd([[
-	nnoremap <Tab> >>_
+    nnoremap <Tab> >>_
 	nnoremap <S-Tab> <<_
-	vmap <S-Tab>  mm<`m:<C-U>exec "normal ".&shiftwidth."h"<CR>mmgv`m
-	vmap <Tab>    mm>`m:<C-U>exec "normal ".&shiftwidth."l"<CR>mmgv`m
+    vmap <leader>d >gv
+    vmap <leader>a <gv
 ]])
+
+-- vmap <S-Tab>  mm<`m:<C-U>exec "normal ".&shiftwidth."h"<CR>mmgv`m
+-- vmap <Tab>    mm>`m:<C-U>exec "normal ".&shiftwidth."l"<CR>mmgv`m
+-- keymap('v', '<Tab>', '>',{})
+-- keymap('v', '<S-Tab>', '<',{})
+
 -- search removing search setting
 keymap('n', '<A-k>', ':nohls<CR>', noremap_opts)
 

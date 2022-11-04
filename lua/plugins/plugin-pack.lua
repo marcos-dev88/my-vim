@@ -101,23 +101,25 @@ return require('packer').startup(function()
     use 'ludovicchabant/vim-gutentags'
     use 'vimcolorschemes/vimcolorschemes'
     -- Go plug
-    use {
-      'fatih/vim-go', 
-      run = ':GoUpdateBinaries'
-    }
+    if vim.g.vscode then
+    else
+        use {
+          'fatih/vim-go', 
+          run = ':GoUpdateBinaries'
+        }
+        use {
+          'neoclide/coc.nvim', 
+          branch = 'release',
 
-    use {
-      'neoclide/coc.nvim', 
-      branch = 'release',
-
-      cmd([[
-        if has('nvim')
-            inoremap <silent><expr> <c-space> coc#refresh()
-        else
-            inoremap <silent><expr> <c-@> coc#refresh()
-        endif
-      ]])
-    }
+          cmd([[
+            if has('nvim')
+                inoremap <silent><expr> <c-space> coc#refresh()
+            else
+                inoremap <silent><expr> <c-@> coc#refresh()
+            endif
+          ]])
+        }
+    end
 
     use 'SirVer/ultisnips' -- https://github.com/sirver/UtiSnips
 
