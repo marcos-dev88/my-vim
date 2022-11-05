@@ -6,8 +6,8 @@ keymap('n', 'q', ':q<CR>', noremap_opts)
 cmd([[
     nnoremap <Tab> >>_
 	nnoremap <S-Tab> <<_
-    vmap <leader>d >gv
-    vmap <leader>a <gv
+    vmap <tab> >gv
+    vmap <S-Tab> <gv
 ]])
 
 -- vmap <S-Tab>  mm<`m:<C-U>exec "normal ".&shiftwidth."h"<CR>mmgv`m
