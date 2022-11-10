@@ -16,6 +16,7 @@ vim.cmd([[
     set backspace=indent,eol,start
     set softtabstop=4
     set expandtab ts=4 sw=4 ai
+    set number relativenumber
 ]])
 
 opt.guifont = { "JetBrains Mono", "h12" } 
