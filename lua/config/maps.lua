@@ -1,7 +1,7 @@
 local keymap = vim.api.nvim_set_keymap
 local noremap_opts = { noremap = true }
 local cmd = vim.cmd
-keymap('n', 'q', ':q<CR>', noremap_opts)
+keymap('n', '<C-q>', ':q<CR>', noremap_opts)
 -- tab config keymap
 cmd([[
     nnoremap <Tab> >>_
@@ -30,6 +30,11 @@ keymap('v', '<C-s>', '<ESC>:w<CR>', {})
 
 -- select all
 keymap('n', '<C-a>', 'ggVG', noremap_opts)
+
+-- multiselect
+cmd([[
+    vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+]])
 
 -- auto-complete dev sections
 cmd([[
