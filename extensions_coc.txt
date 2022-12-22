@@ -1,7 +1,6 @@
 Most used coc plugin extension:
 
 * coc-json;
-* coc-rls;
 * coc-rust-analyzer;
 * coc-yaml;
 * coc-git;
