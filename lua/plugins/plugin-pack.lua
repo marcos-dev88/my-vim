@@ -145,14 +145,9 @@ return require('packer').startup(function()
     use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
     use 'onsails/lspkind-nvim'
 
-
-
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
     if packer_bootstrap then
       require('packer').sync()
     end
 end)
-
-
-
