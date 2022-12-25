@@ -13,7 +13,8 @@ vim.o.completeopt = 'menuone,noselect'
 local cmp = require'cmp'
 local luasnip = require("luasnip")
 
-local lspkind = require('lspkind')
+local lspkind = require('plugins.lsp.lspkind')
+
 local source_mapping = {
     buffer = "◉ Buffer",
     nvim_lsp = "🗺  [LSP]",
@@ -34,7 +35,7 @@ cmp.setup({
 
   formatting = {
     format = function(entry, vim_item)
-      vim_item.kind = lspkind.presets.default[vim_item.kind]
+      vim_item.kind = lspkind.presets.codicons[vim_item.kind]
       local menu = source_mapping[entry.source.name]
       if entry.source.name == 'cmp_tabnine' then
         if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
