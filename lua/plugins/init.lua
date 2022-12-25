@@ -1,2 +1,5 @@
 require("plugins.plugin-pack")
 require("plugins.lsp")
+require("plugins.vim-airline-themes")
+require("plugins.telescope")
+require("plugins.vim-commentary")
