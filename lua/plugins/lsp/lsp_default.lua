@@ -92,3 +92,4 @@ cmp.setup({
 require("luasnip/loaders/from_vscode").load()
 
 require "plugins.lsp.config.golang"
+require "plugins.lsp.config.rust"

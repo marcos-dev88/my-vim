@@ -2,4 +2,4 @@
 tags
 
 # plugin compiled
-./plugin/packer_compiled.lua
+./plugin/*

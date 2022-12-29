@@ -27,7 +27,7 @@ return require('packer').startup(function()
     use 'Xuyuanp/nerdtree-git-plugin'
     use 'ludovicchabant/vim-gutentags'
     use 'vimcolorschemes/vimcolorschemes'
-    -- Go plug
+    -- Go config
     if vim.g.vscode then
     else
         use {
@@ -36,6 +36,15 @@ return require('packer').startup(function()
         } 
     end
 
+    -- Treesitter config
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate'
+    }
+
+    use 'nvim-treesitter/nvim-treesitter-refactor'
+    use 'nvim-treesitter/playground'
+    
     use 'SirVer/ultisnips' -- https://github.com/sirver/UtiSnips
 
     -- Git config
@@ -59,6 +68,9 @@ return require('packer').startup(function()
     use 'ray-x/lsp_signature.nvim'
     use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
     use 'onsails/lspkind-nvim'
+
+    -- rust config
+    use 'simrat39/rust-tools.nvim'
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
