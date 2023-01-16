@@ -55,3 +55,9 @@ keymap('n', '<space>', 'za', noremap_opts)
 
 -- copy to clipboard the realpath
 keymap('n', '<leader>p', ':r!realpath %<CR>dd<CR>', noremap_opts)
+
+-- resize windows: 
+keymap('n', '<C-h>', ':vertical resize -3<CR>', noremap_opts)
+keymap('n', '<C-l>', ':vertical resize +3<CR>', noremap_opts) 
+keymap('n', '<C-j>', ':resize +3<CR>', noremap_opts) 
+keymap('n', '<C-k>', ':resize -3<CR>', noremap_opts)

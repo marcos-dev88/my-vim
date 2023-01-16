@@ -48,10 +48,10 @@ return require('packer').startup(function()
     use 'SirVer/ultisnips' -- https://github.com/sirver/UtiSnips
 
     -- Git config
-    use 'mhinz/vim-signify'
-    use 'tpope/vim-fugitive'
-    use 'tpope/vim-rhubarb'
-  
+    use {
+        'lewis6991/gitsigns.nvim',
+    }
+      
     -- Def colorscheme
     require('palenightfall').setup()     
 

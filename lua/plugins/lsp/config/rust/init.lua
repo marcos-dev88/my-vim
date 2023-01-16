@@ -7,11 +7,20 @@ local on_attach = function(client)
     require'completion'.on_attach(client)
 end
 
+local my_rust_bin = os.getenv("RUSTBIN")
+
 nvim_lsp.rust_analyzer.setup {
     capabilities = capabilities,
     on_attach = on_attach,
     settings = {
         ["rust-analyzer"] = {
+            inlayHints = {
+                  locationLinks = false,
+                  lifetimeElisionHints = {
+                    enable = true,
+                    useParameterNames = true
+                  },
+            },
             cargo = { loadOutDirsFromCheck = true },
             procMacro = { enable = true },
              imports = {
@@ -36,7 +45,7 @@ local opts = {
   -- rust-tools options
   tools = {
     autoSetHints = true,
-    hover_with_actions = true,
+    rust_hover_actions = true,
     inlay_hints = {
       show_parameter_hints = true,
       parameter_hints_prefix = "",
@@ -50,7 +59,7 @@ local opts = {
   -- https://rust-analyzer.github.io/manual.html#features
 
   server = {
-   cmd = { vim.env.HOME .. '/.cargo/bin/rust-analyzer' },
+   cmd = { my_rust_bin .. '/rust-analyzer' },
    cmd_env = { OPENSSL_DIR = '/usr/local/ssl' },    
    settings = {
       ["rust-analyzer"] = {
@@ -67,6 +76,7 @@ local opts = {
           },
         },
         inlayHints = {
+          locationLinks = false,
           lifetimeElisionHints = {
             enable = true,
             useParameterNames = true
