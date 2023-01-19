@@ -51,6 +51,8 @@ return require('packer').startup(function()
     use {
         'lewis6991/gitsigns.nvim',
     }
+
+    use 'glepnir/dashboard-nvim'
       
     -- Def colorscheme
     require('palenightfall').setup()     
