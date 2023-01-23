@@ -51,6 +51,8 @@ return require('packer').startup(function()
     use {
         'lewis6991/gitsigns.nvim',
     }
+
+    use 'glepnir/dashboard-nvim'
       
     -- Def colorscheme
     require('palenightfall').setup()     
@@ -71,6 +73,12 @@ return require('packer').startup(function()
 
     -- rust config
     use 'simrat39/rust-tools.nvim'
+    use {
+        'rust-lang/rust.vim',
+        cmd([[ 
+            let g:rustfmt_autosave = 1
+        ]])
+    }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
