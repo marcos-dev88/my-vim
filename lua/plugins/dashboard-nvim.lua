@@ -20,7 +20,7 @@ dashboard.settings = {
             shortcut = "Ctrl + q",
             action = "q",
         },
-            },
+    },
     header = {
         "                                                                             ",
         "                                          ,.7ÑÑÑ@7.,,                        ",

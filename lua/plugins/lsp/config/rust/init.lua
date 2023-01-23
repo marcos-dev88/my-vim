@@ -22,6 +22,11 @@ nvim_lsp.rust_analyzer.setup {
                   },
             },
             cargo = { loadOutDirsFromCheck = true },
+            checkOnSave = {
+              -- default: `cargo check`
+                  allFeatures = true,
+                  command = "clippy"
+            },
             procMacro = { enable = true },
              imports = {
                 granularity = {
@@ -72,6 +77,7 @@ local opts = {
           },
         checkOnSave = {
           -- default: `cargo check`
+          allFeatures = true,
           command = "clippy"
           },
         },
