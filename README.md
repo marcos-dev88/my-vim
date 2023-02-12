@@ -4,6 +4,7 @@
 * Ctags
 * Python
 * Neovim
+* ripgrep (If you didn't have installed yet)
 
 --
 

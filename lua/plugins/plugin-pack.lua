@@ -20,7 +20,13 @@ return require('packer').startup(function()
     use 'tribela/vim-transparent' 
     use {
         'nvim-telescope/telescope.nvim',
-        requires = { {'nvim-lua/plenary.nvim'} }
+        requires = { 
+            { 'nvim-lua/plenary.nvim' },
+            { 'nvim-telescope/telescope-live-grep-args.nvim' },
+        },
+        config = function()
+            require('telescope').load_extension('live_grep_args')
+        end
     }
     use 'tpope/vim-commentary' -- https://github.com/tpope/vim-commentary
     use 'mkitt/tabline.vim' -- https://github.com/mkitt/tabline.vim
@@ -52,10 +58,19 @@ return require('packer').startup(function()
         'lewis6991/gitsigns.nvim',
     }
 
-    use 'glepnir/dashboard-nvim'
+    use 'nvim-tree/nvim-web-devicons'
+
+    use {  
+        'glepnir/dashboard-nvim',
+        requires = {{ 'nvim-tree/nvim-web-devicons' }},
+    }
       
     -- Def colorscheme
-    require('palenightfall').setup()     
+    -- require('palenightfall').setup()     
+    use {
+        'ViViDboarder/wombat.nvim',
+        requires = {{ 'rktjmp/lush.nvim' }}
+    }
 
     -- LSP config
     use 'neovim/nvim-lspconfig'
