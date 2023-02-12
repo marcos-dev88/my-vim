@@ -19,7 +19,7 @@ vim.cmd([[
     set number relativenumber
 ]])
 
-opt.guifont = { "JetBrains Mono", "h12" } 
+opt.guifont = { "JetBrains Mono Regular", "h12" } 
 opt.number = true
 opt.smartindent = true
 opt.expandtab = true
