@@ -3,21 +3,22 @@ local dashboard = {}
 dashboard.settings = {
     shortcuts = {
         {
-            icon = "  ",
-            desc = "Find Files            ",
-            shortcut = ", + f",
+            -- icon = "🗀  ",
+            icon = "🔍 ",
+            desc = "Find Files             ",
+            key = ", + f",
             action = "Telescope find_files hidden=true",
         },
         {
-            icon = "T  ",
-            desc = "Search Text                 ",
-            shortcut = "",
-            action = "Telescope live_grep",
+            icon = "𝐓 ",
+            desc = "Search Text            ",
+            key = ", + s",
+            action = "Telescope live_grep_args",
         },
         {
-            icon = "✖  ",
-            desc = "Exit                ",
-            shortcut = "Ctrl + q",
+            icon = "✖ ",
+            desc = "Exit               ",
+            key = "Ctrl + q",
             action = "q",
         },
     },
@@ -59,10 +60,19 @@ dashboard.settings = {
     },
  }
  
-local db = require('dashboard')
+require('dashboard').setup({
+    theme = 'doom',
+    config = {
+        header = dashboard.settings.header,
+        center = dashboard.settings.shortcuts,
+        footer = dashboard.settings.footer,
+    },
+    hide = {},
+    preview = {},
+})
 -- db.hide_statusline = true
 -- db.hide_tabline = true
 -- db.hide_winbar = true
-db.custom_header = dashboard.settings.header
-db.custom_center = dashboard.settings.shortcuts
-db.custom_footer = dashboard.settings.footer
+-- db.custom_header = dashboard.settings.header
+-- db.custom_center = dashboard.settings.shortcuts
+-- db.custom_footer = dashboard.settings.footer
