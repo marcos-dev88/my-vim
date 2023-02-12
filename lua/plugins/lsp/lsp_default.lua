@@ -16,12 +16,12 @@ local luasnip = require("luasnip")
 local lspkind = require('plugins.lsp.lspkind')
 
 local source_mapping = {
-    buffer = "◉ Buffer",
-    nvim_lsp = "🗺  [LSP]",
-    nvim_lua = "🗺  [Lua]",
-    cmp_tabnine = "🗺  [Tabnine]",
-    path = "🗺  [Path]",
-    luasnip = "🗺 LuaSnip"
+    buffer = "󱦟 [Buffer]",
+    nvim_lsp = " [LSP]",
+    nvim_lua = " [Lua]",
+    cmp_tabnine = " [Tabnine]",
+    path = "󰴠 [Path]",
+    luasnip = " [LuaSnip]"
 }
 
 cmp.setup({

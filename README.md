@@ -4,6 +4,7 @@
 * Ctags
 * Python
 * Neovim
+* nerdfont (To work the lsp icons)
 * ripgrep (If you didn't have installed yet)
 
 --
