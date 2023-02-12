@@ -5,5 +5,5 @@ require("plugins")
 require("config.lsp_icons")
 
 cmd([[
-    :colorscheme ayu
+    :colorscheme wombat256mod
 ]])
