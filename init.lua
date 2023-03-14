@@ -6,4 +6,5 @@ require("config.lsp_icons")
 
 cmd([[
     :colorscheme purify
+    :hi NormalFloat ctermfg=White
 ]])
