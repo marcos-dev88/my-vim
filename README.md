@@ -1,4 +1,4 @@
-# My NeoVim
+# My Neovim
 
 ### Requirements:
 * Ctags
