@@ -3,3 +3,5 @@ if extension == "md" then
 else
   require("plugins.lsp.lsp_default")
 end
+
+require("plugins.lsp.diagnostics")
