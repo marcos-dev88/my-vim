@@ -86,7 +86,12 @@ cmp.setup({
         fallback()
       end
     end,
-  },
+  },       
+})
+
+cmp.config.window.bordered({
+    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    winhighlight = 'NormalFloat:NormalFloat,FloatBorder:FloatBorder',
 })
 
 require("luasnip/loaders/from_vscode").load()

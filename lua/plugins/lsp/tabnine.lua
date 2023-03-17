@@ -108,3 +108,8 @@ require'cmp'.setup {
     end
   },
 }
+
+cmp.config.window.bordered({
+    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    winhighlight = 'NormalFloat:NormalFloat,FloatBorder:FloatBorder',
+})
