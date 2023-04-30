@@ -86,7 +86,7 @@ local renderer_setup = {
           symlink_open = "",
         },
         git = {
-          unstaged = "✗",
+          unstaged = "⇅",
           staged = "✓",
           unmerged = "",
           renamed = "➜",
@@ -108,7 +108,7 @@ local renderer_setup = {
     timeout = 500,
 }
 
-keymap('n', '<leader>t', ':NvimTreeToggle<CR>', noremap_opts)
+keymap('n', '<leader>e', ':NvimTreeToggle<CR>', noremap_opts)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
@@ -116,7 +116,7 @@ return {
   auto_reload_on_write = true,
   disable_netrw = true,
   hijack_cursor = false,
-  hijack_netrw = true,
+  hijack_netrw = false,
   hijack_unnamed_buffer_when_opening = false,
   sort_by = "name",
   root_dirs = {},
@@ -197,7 +197,7 @@ return {
       },
     },
     open_file = {
-      quit_on_open = true, -- check this later
+      quit_on_open = false, -- check this later
       resize_window = true,
       window_picker = {
         enable = true,
