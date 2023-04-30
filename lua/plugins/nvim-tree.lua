@@ -134,7 +134,7 @@ return {
     auto_open = true,
   },
   update_focused_file = {
-    enable = false,
+    enable = true,
     update_root = false,
     ignore_list = {},
   },
