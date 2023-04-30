@@ -16,7 +16,7 @@ cmd([[
 -- keymap('v', '<S-Tab>', '<',{})
 
 -- search removing search setting
-keymap('n', '<A-k>', ':nohls<CR>', noremap_opts)
+keymap('n', '<A-q>', ':nohls<CR>', noremap_opts)
 
 -- tab config
 keymap('n', '<A-,>', 'gT', noremap_opts)
@@ -57,7 +57,13 @@ keymap('n', '<space>', 'za', noremap_opts)
 keymap('n', '<leader>p', ':r!realpath %<CR>dd<CR>', noremap_opts)
 
 -- resize windows: 
-keymap('n', '<C-h>', ':vertical resize -3<CR>', noremap_opts)
-keymap('n', '<C-l>', ':vertical resize +3<CR>', noremap_opts) 
-keymap('n', '<C-j>', ':resize +3<CR>', noremap_opts) 
-keymap('n', '<C-k>', ':resize -3<CR>', noremap_opts)
+keymap('n', '<A-h>', ':vertical resize -3<CR>', noremap_opts)
+keymap('n', '<A-l>', ':vertical resize +3<CR>', noremap_opts) 
+keymap('n', '<A-j>', ':resize +3<CR>', noremap_opts) 
+keymap('n', '<A-k>', ':resize -3<CR>', noremap_opts)
+
+-- change windows
+keymap('n', '<C-h>', '<C-w>h', noremap_opts)
+keymap('n', '<C-l>', '<C-w>l', noremap_opts) 
+keymap('n', '<C-j>', '<C-w>j', noremap_opts) 
+keymap('n', '<C-k>', '<C-w>k', noremap_opts)

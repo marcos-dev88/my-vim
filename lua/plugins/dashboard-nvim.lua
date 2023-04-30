@@ -3,7 +3,12 @@ local dashboard = {}
 dashboard.settings = {
     shortcuts = {
         {
-            -- icon = "🗀  ",
+            icon = "󰴠 ",
+            desc = "Project structure      ",
+            key = ", + e",
+            action = "NvimTreeToggle",
+        },
+        {
             icon = "🔍 ",
             desc = "Find Files             ",
             key = ", + f",
