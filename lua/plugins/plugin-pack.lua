@@ -72,6 +72,15 @@ return require('packer').startup(function()
         requires = {{ 'rktjmp/lush.nvim' }}
     }
 
+    use { 
+        'nvim-tree/nvim-tree.lua',
+        requires = {
+            'nvim-tree/nvim-web-devicons', -- optional
+        },
+ 
+        require("nvim-tree").setup(require 'plugins.nvim-tree')
+    }
+
     -- LSP config
     use 'neovim/nvim-lspconfig'
     use 'hrsh7th/nvim-cmp'
