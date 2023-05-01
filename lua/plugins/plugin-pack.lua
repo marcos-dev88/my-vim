@@ -14,9 +14,9 @@ return require('packer').startup(function()
     use 'vim-airline/vim-airline'
     use 'vim-airline/vim-airline-themes'
     use 'ryanoasis/vim-devicons' -- https://github.com/ryanoasis/vim-devicons + https://github.com/ryanoasis/nerd-fonts/
-    use 'rafi/awesome-vim-colorschemes' -- https://github.com/rafi/awesome-vim-colorschemes 
-    use 'LunarVim/Colorschemes'
-    use 'JoosepAlviste/palenightfall.nvim'
+    -- use 'rafi/awesome-vim-colorschemes' -- https://github.com/rafi/awesome-vim-colorschemes 
+    -- use 'LunarVim/Colorschemes'
+    -- use 'JoosepAlviste/palenightfall.nvim'
     use 'tribela/vim-transparent' 
     use {
         'nvim-telescope/telescope.nvim',
@@ -32,7 +32,7 @@ return require('packer').startup(function()
     use 'mkitt/tabline.vim' -- https://github.com/mkitt/tabline.vim
     use 'Xuyuanp/nerdtree-git-plugin'
     use 'ludovicchabant/vim-gutentags'
-    use 'vimcolorschemes/vimcolorschemes'
+    -- use 'vimcolorschemes/vimcolorschemes'
     -- Go config
     if vim.g.vscode then
     else
@@ -65,8 +65,9 @@ return require('packer').startup(function()
         requires = {{ 'nvim-tree/nvim-web-devicons' }},
     }
       
-    -- Def colorscheme
-    -- require('palenightfall').setup()     
+    -- install colorscheme
+    use 'navarasu/onedark.nvim'
+
     use {
         'ViViDboarder/wombat.nvim',
         requires = {{ 'rktjmp/lush.nvim' }}
