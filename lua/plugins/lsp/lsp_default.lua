@@ -102,6 +102,8 @@ cmp.setup({
       end
     end, {'i', 's'}),
 
+    ['<C-Space>'] = cmp.mapping.complete(),
+
     ['<S-Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item(select_opts)
