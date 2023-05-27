@@ -16,7 +16,7 @@ require('onedark').setup  {
     code_style = {
         comments = 'italic',
         keywords = 'none',
-        functions = 'none',
+        functions = 'bold,italic',
         strings = 'none',
         variables = 'none'
     },
@@ -28,7 +28,10 @@ require('onedark').setup  {
 
     -- Custom Highlights --
     colors = {}, -- Override default colors
-    highlights = {}, -- Override highlight groups
+    highlights = {
+        ["@function"] = {fmt = 'bold,italic'},
+        ["@function.builtin"] = {fmt = 'italic'}
+    }, -- Override highlight groups
 
     -- Plugins Config --
     diagnostics = {

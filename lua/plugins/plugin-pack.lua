@@ -67,6 +67,8 @@ return require('packer').startup(function()
       
     -- install colorscheme
     use 'navarasu/onedark.nvim'
+    use { "catppuccin/nvim", as = "catppuccin" }
+    use 'rebelot/kanagawa.nvim'
 
     use {
         'ViViDboarder/wombat.nvim',
