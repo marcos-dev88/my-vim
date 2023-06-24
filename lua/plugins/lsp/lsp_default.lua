@@ -116,7 +116,26 @@ cmp.setup({
 
 -- cmp.config.window.bordered()
 
-require("luasnip/loaders/from_vscode").load()
+-- require("luasnip/loaders/from_vscode").load()
+--
+
+require('lsp-lens').setup({
+    enable = true,
+    include_declaration = true,
+    sections = {
+        definition = true,
+        references = true,
+        implementation = true,
+    },
+})
+
+-- auto format on saving
+-- for other nvim versions you should use 'formatting()' function instead of 'format()'
+vim.api.nvim_create_autocmd("BufWritePre", { 
+    callback = function(args)
+        vim.lsp.buf.format()
+    end,
+})
 
 require "plugins.lsp.config.golang"
 require "plugins.lsp.config.rust"
