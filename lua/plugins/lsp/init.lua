@@ -5,3 +5,4 @@ else
 end
 
 require("plugins.lsp.diagnostics")
+require("plugins.lsp.lsp_keymaps")

@@ -34,13 +34,10 @@ return require('packer').startup(function()
     use 'ludovicchabant/vim-gutentags'
     -- use 'vimcolorschemes/vimcolorschemes'
     -- Go config
-    if vim.g.vscode then
-    else
-        use {
-          'fatih/vim-go', 
-          run = ':GoUpdateBinaries'
-        } 
-    end
+    use {
+      'fatih/vim-go', 
+      run = ':GoUpdateBinaries'
+    } 
 
     -- Treesitter config
     use {
@@ -95,8 +92,14 @@ return require('packer').startup(function()
     use 'L3MON4D3/LuaSnip'
     use 'rafamadriz/friendly-snippets'
     use 'ray-x/lsp_signature.nvim'
-    use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
+    use {
+        'tzachar/cmp-tabnine', 
+        run='./install.sh', 
+        requires = 'hrsh7th/nvim-cmp'
+    }
+
     use 'onsails/lspkind-nvim'
+    use 'VidocqH/lsp-lens.nvim'
 
     -- rust config
     use 'simrat39/rust-tools.nvim'
@@ -106,6 +109,8 @@ return require('packer').startup(function()
             let g:rustfmt_autosave = 1
         ]])
     }
+
+    -- use 'mfussenegger/nvim-jdtls'
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
