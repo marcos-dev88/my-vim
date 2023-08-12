@@ -55,6 +55,10 @@ return require('packer').startup(function()
         'lewis6991/gitsigns.nvim',
     }
 
+    use { 
+        'akinsho/git-conflict.nvim'
+    }
+
     use 'nvim-tree/nvim-web-devicons'
 
     use {  
