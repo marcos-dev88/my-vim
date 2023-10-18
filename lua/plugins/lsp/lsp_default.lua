@@ -114,10 +114,6 @@ cmp.setup({
   },      
 })
 
--- cmp.config.window.bordered()
-
--- require("luasnip/loaders/from_vscode").load()
---
 
 require('lsp-lens').setup({
     enable = true,
@@ -137,5 +133,8 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end,
 })
 
+require "plugins.lsp.config.c"
 require "plugins.lsp.config.golang"
 require "plugins.lsp.config.rust"
+require "plugins.lsp.config.js"
+-- require "plugins.lsp.config.v"
