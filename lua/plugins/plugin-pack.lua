@@ -35,8 +35,8 @@ return require('packer').startup(function()
     -- use 'vimcolorschemes/vimcolorschemes'
     -- Go config
     use {
-      'fatih/vim-go', 
-      run = ':GoUpdateBinaries'
+        'fatih/vim-go', 
+        run = ':GoUpdateBinaries'
     } 
 
     -- Treesitter config
@@ -47,7 +47,7 @@ return require('packer').startup(function()
 
     use 'nvim-treesitter/nvim-treesitter-refactor'
     use 'nvim-treesitter/playground'
-    
+
     use 'SirVer/ultisnips' -- https://github.com/sirver/UtiSnips
 
     -- Git config
@@ -65,7 +65,7 @@ return require('packer').startup(function()
         'glepnir/dashboard-nvim',
         requires = {{ 'nvim-tree/nvim-web-devicons' }},
     }
-      
+
     -- install colorscheme
     use 'navarasu/onedark.nvim'
     use { "catppuccin/nvim", as = "catppuccin" }
@@ -81,8 +81,6 @@ return require('packer').startup(function()
         requires = {
             'nvim-tree/nvim-web-devicons', -- optional
         },
- 
-        require("nvim-tree").setup(require 'plugins.nvim-tree')
     }
 
     -- LSP config
@@ -110,15 +108,27 @@ return require('packer').startup(function()
     use {
         'rust-lang/rust.vim',
         cmd([[ 
-            let g:rustfmt_autosave = 1
+        let g:rustfmt_autosave = 1
         ]])
     }
 
-    -- use 'mfussenegger/nvim-jdtls'
+    -- use 'ollykel/v-vim'
 
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
+    use 'mfussenegger/nvim-jdtls'
+
+    use {
+        'mfussenegger/nvim-dap',
+        requires = {
+            {'rcarriga/nvim-dap-ui'},
+            {'williamboman/mason.nvim'},
+            {'jay-babu/mason-nvim-dap.nvim'},
+            {'leoluz/nvim-dap-go'},
+        },
+    }
+
+    -- Automatically set up your configuration after cloning packer.nvim
+    -- Put this at the end after all plugins
     if packer_bootstrap then
-      require('packer').sync()
+        require('packer').sync()
     end
 end)

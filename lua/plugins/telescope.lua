@@ -4,6 +4,7 @@ if not ok then
 end
 
 local t_grep_actions = require('telescope-live-grep-args.actions')
+local builtin = require('telescope.builtin')
 local keymap = vim.api.nvim_set_keymap
 local noremap_opts = { noremap = true }
 local ignore_folders_tls = {
@@ -35,5 +36,10 @@ t.setup{
     }
 }
 
+
 keymap('n', '<leader>f', '<cmd>Telescope find_files hidden=true<CR>', noremap_opts)
 keymap('n', '<leader>s', "<cmd>Telescope live_grep_args<CR>", noremap_opts)
+
+vim.keymap.set('n', 'ff', function()
+    builtin.grep_string({ search = vim.fn.input("Grep > ") })
+end)

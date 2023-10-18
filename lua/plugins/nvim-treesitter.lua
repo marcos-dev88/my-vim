@@ -20,6 +20,7 @@ tsitter.setup({
         "yaml",
         "javascript",
         "typescript",
+        "java",
     },
     sync_install = false,
     auto_install = true,
@@ -31,5 +32,3 @@ tsitter.setup({
         additional_vim_regex_highlighting = false,
     }
 })
-
-

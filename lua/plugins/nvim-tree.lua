@@ -11,18 +11,11 @@ local view_setup = {
     cursorline = true,
     debounce_delay = 15,
     width = 30,
-    hide_root_folder = false,
     side = "left",
     preserve_window_proportions = true,
     number = false,
     relativenumber = false,
-    signcolumn = "yes",
-    mappings = {
-      custom_only = false,
-      list = {
-        -- user mappings go here
-      },
-    },
+    signcolumn = "yes", 
     float = {
       enable = false,
       quit_on_focus_loss = true,
@@ -102,7 +95,7 @@ local renderer_setup = {
 
  local git_config = {
     enable = true,
-    ignore = true,
+    ignore = false,
     show_on_dirs = true,
     show_on_open_dirs = true,
     timeout = 500,
@@ -112,7 +105,7 @@ keymap('n', '<leader>e', ':NvimTreeToggle<CR>', noremap_opts)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
-return { 
+local config = { 
   auto_reload_on_write = true,
   disable_netrw = true,
   hijack_cursor = false,
@@ -125,7 +118,6 @@ return {
   reload_on_bufenter = false,
   respect_buf_cwd = false,
   on_attach = "default",
-  remove_keymaps = false,
   select_prompts = false,
   view = view_setup,
   renderer = renderer_setup,
@@ -256,3 +248,5 @@ return {
     },
   },
 }
+
+nt.setup(config)
