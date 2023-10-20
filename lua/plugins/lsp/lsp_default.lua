@@ -114,17 +114,6 @@ cmp.setup({
   },      
 })
 
-
-require('lsp-lens').setup({
-    enable = true,
-    include_declaration = true,
-    sections = {
-        definition = true,
-        references = true,
-        implementation = true,
-    },
-})
-
 -- auto format on saving
 -- for other nvim versions you should use 'formatting()' function instead of 'format()'
 vim.api.nvim_create_autocmd("BufWritePre", { 
