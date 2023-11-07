@@ -53,7 +53,7 @@ vim.keymap.set('n', 'fr', function()
         set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case
         %s
         :cfdo %s/%s/%s/gce | update ]], 
-        in_search, "set grepformat=%f:%l:%c:%m", "%s", in_search, in_search
+        in_search, "set grepformat=%f:%l:%c:%m", "%s", in_search, in_replace
     ))
  
 end)
