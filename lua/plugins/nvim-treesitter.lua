@@ -21,10 +21,12 @@ tsitter.setup({
         "javascript",
         "typescript",
         "java",
+        "zig",
+        "python",
     },
     sync_install = false,
     auto_install = true,
-    -- ignore_install = { "javascript" },
+    -- ignore_install = { "yaml" },
 
     highlight = {
         enable = true,

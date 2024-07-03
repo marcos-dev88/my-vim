@@ -71,12 +71,12 @@ local renderer_setup = {
         folder = {
           arrow_closed = "",
           arrow_open = "",
-          default = "",
-          open = "",
+          default = "󰉖",
+          open = "󰉖",
           empty = "",
-          empty_open = "",
-          symlink = "",
-          symlink_open = "",
+          empty_open = "",
+          symlink = "󱉆",
+          symlink_open = "󱉆",
         },
         git = {
           unstaged = "⇅",

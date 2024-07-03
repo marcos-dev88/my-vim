@@ -61,6 +61,16 @@ dapui.setup {
     },
 }
 
+-- config breakpoint color
+vim.api.nvim_set_hl(0, "red_breakpoint", {ctermbg = 0, fg = "#F93D3D"})
+vim.api.nvim_set_hl(0, "green_breakpoint", {ctermbg = 0, fg = "#36d93e"})
+
+vim.fn.sign_define("DapBreakpoint", {texthl = "red_breakpoint", text= "⚫", linehl = "DapBreakpoint", numhl = "DapBreakpoint"})
+vim.fn.sign_define("DapBreakpointCondition", {texthl = "green_breakpoint", text= "⚫", linehl = "DapBreakpoint", numhl = "DapBreakpoint"})
+vim.fn.sign_define("DapBreakpointRejected", {texthl = "red_breakpoint", text= "⚫", linehl = "DapBreakpoint", numhl = "DapBreakpoint"})
+vim.fn.sign_define("DapStopped", {texthl = "green_breakpoint", text= "⚫", linehl = "DapBreakpoint", numhl = "DapBreakpoint"})
+vim.fn.sign_define("DapLogPoint", {texthl = "green_breakpoint", text= "⚫", linehl = "DapBreakpoint", numhl = "DapBreakpoint"})
+
 -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
 vim.keymap.set('n', '<F7>', dapui.toggle, { desc = 'Debug: See last session result.' })
 
