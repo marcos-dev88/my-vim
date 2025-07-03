@@ -1,69 +1,73 @@
-local keymap = vim.api.nvim_set_keymap
-local noremap_opts = { noremap = true }
-local cmd = vim.cmd
-keymap('n', '<C-q>', ':q<CR>', noremap_opts)
--- tab config keymap
-cmd([[
-    nnoremap <Tab> >>_
-	nnoremap <S-Tab> <<_
-    vmap <tab> >gv
-    vmap <S-Tab> <gv
-]])
 
--- vmap <S-Tab>  mm<`m:<C-U>exec "normal ".&shiftwidth."h"<CR>mmgv`m
--- vmap <Tab>    mm>`m:<C-U>exec "normal ".&shiftwidth."l"<CR>mmgv`m
--- keymap('v', '<Tab>', '>',{})
--- keymap('v', '<S-Tab>', '<',{})
+local keymap = vim.keymap
+local opts = { noremap = true, silent = true }
 
--- search removing search setting
-keymap('n', '<A-q>', ':nohls<CR>', noremap_opts)
+-- Líder
+vim.g.mapleader = ","
 
--- tab config
-keymap('n', '<A-,>', 'gT', noremap_opts)
-keymap('n', '<A-.>', 'gt', noremap_opts)
-keymap('n', '<A-c>', ':tabclose<CR>', noremap_opts)
+-- Sair com Ctrl+Q
+keymap.set('n', '<C-q>', ':q<CR>', opts)
 
--- save config
-keymap('n', '<C-s>', ':w<CR>', noremap_opts)
-keymap('i', '<C-s>', '<ESC>:w<CR>l', {}) 
-keymap('v', '<C-s>', '<ESC>:w<CR>', {}) 
+-- Tab para indentação no modo normal
+keymap.set('n', '<Tab>', '>>_', opts)
+keymap.set('n', '<S-Tab>', '<<_', opts)
 
--- select all
-keymap('n', '<C-a>', 'ggVG', noremap_opts)
+-- Tab para indentação no modo visual
+keymap.set('v', '<Tab>', '>gv', opts)
+keymap.set('v', '<S-Tab>', '<gv', opts)
 
--- multiselect
-cmd([[
-    vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
-]])
+-- Remover highlight de busca
+keymap.set('n', '<A-q>', ':nohls<CR>', opts)
 
--- auto-complete dev sections
-cmd([[
-    inoremap " ""<left>
-    inoremap ' ''<left>
-    inoremap ` ``<left>
-]])
+-- Navegação entre tabs
+keymap.set('n', '<A-,>', 'gT', opts)
+keymap.set('n', '<A-.>', 'gt', opts)
+keymap.set('n', '<A-c>', ':tabclose<CR>', opts)
 
-keymap('i', '(', '()<left>', {})
-keymap('i', '[', '[]<left>', {})
-keymap('i', '{', '{}<left>', {})
-keymap('i', '{<CR>', '{<CR>}<ESC>0', {})
-keymap('i', '{;<CR>', '{<CR>};<ESC>0', {})
-keymap('i', '<', '<><left>', {})
+-- Salvar com Ctrl+S
+keymap.set('n', '<C-s>', ':w<CR>', opts)
+keymap.set('i', '<C-s>', '<ESC>:w<CR>l', {})
+keymap.set('v', '<C-s>', '<ESC>:w<CR>', {})
 
--- code folding mapping:
-keymap('n', '<space>', 'za', noremap_opts)
+-- Selecionar tudo com Ctrl+A
+keymap.set('n', '<C-a>', 'ggVG', opts)
 
--- copy to clipboard the realpath
-keymap('n', '<leader>p', ':r!realpath %<CR>dd<CR>', noremap_opts)
+-- Multi-select: procura por seleção atual
+keymap.set('v', '//', function()
+    -- Copia seleção e inicia busca com ela escapada
+    vim.cmd([[normal! y]])
+    local escaped = vim.fn.escape(vim.fn.getreg('"'), '\\/.*$^~[]')
+    vim.fn.setreg('/', escaped)
+    vim.cmd('normal! n')
+end, { desc = "Search by select", noremap = true, silent = true })
 
--- resize windows: 
-keymap('n', '<A-h>', ':vertical resize -3<CR>', noremap_opts)
-keymap('n', '<A-l>', ':vertical resize +3<CR>', noremap_opts) 
-keymap('n', '<A-j>', ':resize +3<CR>', noremap_opts) 
-keymap('n', '<A-k>', ':resize -3<CR>', noremap_opts)
 
--- change windows
-keymap('n', '<C-h>', '<C-w>h', noremap_opts)
-keymap('n', '<C-l>', '<C-w>l', noremap_opts) 
-keymap('n', '<C-j>', '<C-w>j', noremap_opts) 
-keymap('n', '<C-k>', '<C-w>k', noremap_opts)
+-- Auto-complete de pares
+keymap.set('i', '"', '""<Left>', {})
+keymap.set('i', "'", "''<Left>", {})
+keymap.set('i', '`', '``<Left>', {})
+keymap.set('i', '(', '()<Left>', {})
+keymap.set('i', '[', '[]<Left>', {})
+keymap.set('i', '{', '{}<Left>', {})
+keymap.set('i', '{<CR>', '{<CR>}<ESC>0', {})
+keymap.set('i', '{;<CR>', '{<CR>};<ESC>0', {})
+keymap.set('i', '<', '<><Left>', {})
+
+-- Code folding (toggle com espaço)
+keymap.set('n', '<space>', 'za', opts)
+
+-- Copiar caminho real do arquivo atual
+keymap.set('n', '<leader>p', ':r!realpath %<CR>dd<CR>', opts)
+
+-- Redimensionar splits
+keymap.set('n', '<A-h>', ':vertical resize -3<CR>', opts)
+keymap.set('n', '<A-l>', ':vertical resize +3<CR>', opts)
+keymap.set('n', '<A-j>', ':resize +3<CR>', opts)
+keymap.set('n', '<A-k>', ':resize -3<CR>', opts)
+
+-- Mover entre splits
+keymap.set('n', '<C-h>', '<C-w>h', opts)
+keymap.set('n', '<C-l>', '<C-w>l', opts)
+keymap.set('n', '<C-j>', '<C-w>j', opts)
+keymap.set('n', '<C-k>', '<C-w>k', opts)
+

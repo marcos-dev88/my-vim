@@ -1,15 +1,18 @@
-local cmd = vim.cmd
+-- Tema
+vim.cmd.colorscheme("catppuccin-macchiato")
 
--- :hi NormalFloat ctermfg=White ctermbg=233 guifg=#3a3a3a "rbg=58,58,58
--- :colorscheme kanagawa-wave
-cmd([[ 
-    :colorscheme catppuccin-macchiato
+-- Destaques sem fundo (útil para terminais transparentes)
+local highlights = {
+  GitSignsAdd = { bg = "NONE" },
+  GitSignsChange = { bg = "NONE" },
+  GitSignsDelete = { bg = "NONE" },
+  DiagnosticSignError = { bg = "NONE" },
+  DiagnosticSignWarn  = { bg = "NONE" },
+  DiagnosticSignInfo  = { bg = "NONE" },
+  DiagnosticSignHint  = { bg = "NONE" },
+}
 
-    :highlight GitSignsAdd guibg=none
-    :highlight GitSignsChange guibg=none
-    :highlight GitSignsDelete guibg=none
-    :highlight DiagnosticSignError guibg=none
-    :highlight DiagnosticSignWarn guibg=none
-    :highlight DiagnosticSignInfo guibg=none
-    :highlight DiagnosticSignHint guibg=none
-]])
+for group, opts in pairs(highlights) do
+  vim.api.nvim_set_hl(0, group, opts)
+end
+
