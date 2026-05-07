@@ -19,7 +19,7 @@ require("catppuccin").setup({
         comments = { "italic" },
         conditionals = { "italic" },
         loops = {},
-        functions = { "bold" },
+        functions = { "bold", "italic" },
         keywords = {},
         strings = {},
         variables = {},

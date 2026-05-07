@@ -18,10 +18,15 @@ tsitter.setup({
         "toml",
         "json",
         "yaml",
+        "javascript",
+        "typescript",
+        "java",
+        "zig",
+        "python",
     },
     sync_install = false,
     auto_install = true,
-    ignore_install = { "javascript" },
+    -- ignore_install = { "yaml" },
 
     highlight = {
         enable = true,
@@ -29,5 +34,3 @@ tsitter.setup({
         additional_vim_regex_highlighting = false,
     }
 })
-
-

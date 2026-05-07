@@ -1,38 +1,48 @@
-nvim_lsp = require "lspconfig"
+vim.lsp.config("gopls", {
+  cmd = { "gopls" },
 
-local go_bin = os.getenv("GOBIN")
-local go_path = os.getenv("GOPATH")
-local go_path_mod = go_path..'/pkg/mod'
-local util = require('lspconfig/util')
-local last_root_path = nil
+  root_dir = function(fname)
+    return vim.fs.root(fname, {
+      "go.mod",
+      "go.work",
+      ".git",
+    })
+  end,
 
-if my_go_path == nil then
-    my_go_path = ""
-end
-
-nvim_lsp.gopls.setup {
-    cmd = { go_bin .. "/gopls", "serve" },
-    root_dir = function(fname)
-        local full_path = vim.fn.expand(fname, ':p')
-        if string.find(full_path, go_path_mod) and last_root_path ~= nil then
-            return last_root_path
-        end
-        last_root_path = util.root_pattern("go.mod", ".git")(fname)
-        return last_root_path
-    end,
-    settings = {
-      gopls = {
-        analyses = {
-          unusedparams = true,
-        },
-        staticcheck = true,
+  settings = {
+    gopls = {
+      analyses = {
+        unusedparams = true,
+      },
+      staticcheck = true,
+      hints = {
+        assignVariableTypes = true,
+        compositeLiteralFields = true,
+        constantValues = true,
+        functionTypeParameters = true,
+        parameterNames = true,
+        rangeVariableTypes = true,
       },
     },
-}
+  },
 
-vim.api.nvim_create_autocmd('BufWritePre', {
-  pattern = '*.go',
-  callback = function()
-    vim.lsp.buf.code_action({ context = { only = { 'source.organizeImports' } }, apply = true })
-  end
+  on_attach = function(client, bufnr)
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.code_action({
+          context = { only = { "source.organizeImports" } },
+          apply = true,
+        })
+        vim.lsp.buf.format({ async = false })
+      end,
+    })
+  end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "go", "gomod", "gowork", "gotmpl" },
+  callback = function(args)
+    vim.lsp.enable("gopls", { bufnr = args.buf })
+  end,
 })
