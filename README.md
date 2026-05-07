@@ -2,6 +2,19 @@
 
 A high-performance, native-focused Neovim setup optimized for modern development.
 
+# 📚 Table of Contents
+
+- [📋 Requirements](#-requirements)
+- [🔧 System Dependencies](#-system-dependencies)
+  - [Using as default](#using-as-default)
+- [🛠️ Language Servers (LSP) - Installation Guide](#️-language-servers-lsp---installation-guide)
+  - [🔍 Quick Verification](#-quick-verification)
+  - [💡 Tip for Arch Linux](#-tip-for-arch-linux)
+- [🐞 Debugging (DAP) - Installation Guide](#-debugging-dap---installation-guide)
+  - [🔍 Quick Verification (DAP)](#-quick-verification-dap)
+- [🎹 Debugger Keymaps](#-debugger-keymaps)
+  - [💡 Pro Tip](#-pro-tip)
+
 ---
 
 ## 📋 Requirements
@@ -146,5 +159,73 @@ Below are the commands to install each language server configured in my `init.lu
 
 Many of these language servers are available in the **AUR**.  
 If you use an AUR helper such as `yay`, you can simplify most installations with a single command.
+
+## 🐞 Debugging (DAP) - Installation Guide
+
+The debugger is powered by `nvim-dap` and `mason-nvim-dap`. While some configurations are automatic, the following debug adapters must be installed on your system or via Mason to function.
+
+### 1. **Delve** (Go)
+* **Description:** The standard debugger for the Go programming language.
+* **Installation:**
+    ```bash
+    go install [github.com/go-delve/delve/cmd/dlv@latest](https://github.com/go-delve/delve/cmd/dlv@latest)
+    ```
+* **Arch/Manjaro:** `sudo pacman -S delve`
+
+### 2. **Debugpy** (Python)
+* **Description:** The debugger implementation for Python.
+* **Installation (via Pip):**
+    ```bash
+    pip install debugpy
+    ```
+* **Ubuntu/Debian Note:** Ensure `python3-venv` is installed so Mason can manage the adapter:
+    ```bash
+    sudo apt install python3-venv
+    ```
+
+### 3. **Cpptools / GDB** (C/C++/Rust)
+* **Description:** Provides debugging support for compiled languages using the GDB/LLDB backend.
+* **Installation (System):**
+    * **Ubuntu/Debian:** `sudo apt install gdb`
+    * **Arch/Manjaro:** `sudo pacman -S gdb`
+* **Mason Adapter:** Inside Neovim, run `:MasonInstall cpptools`.
+
+### 4. **JS Debug Adapter** (JavaScript/TypeScript)
+* **Description:** The VS Code JavaScript debugger, used for Node.js.
+* **Installation:**
+    Requires Node.js/NPM. Inside Neovim, run:
+    ```vim
+    :MasonInstall js-debug-adapter
+    ```
+
+---
+
+## 🔍 Quick Verification (DAP)
+
+To verify that your debug adapters are ready, check your Mason status or test the binary in your terminal:
+
+| Adapter | Test Command |
+| :--- | :--- |
+| **Go** | `dlv version` |
+| **Python** | `python3 -m debugpy --version` |
+| **C/C++/Rust** | `gdb --version` |
+
+---
+
+## 🎹 Debugger Keymaps
+
+| Key | Action |
+| :--- | :--- |
+| **`<F5>`** | **Start/Continue**: Launch the session or move to the next breakpoint. |
+| **`<F1>`** | **Step Into**: Enter the function at the current line. |
+| **`<F2>`** | **Step Over**: Skip to the next line without entering functions. |
+| **`<F3>`** | **Step Out**: Finish the current function and return to the caller. |
+| **`<leader>b`** | **Toggle Breakpoint**: Mark a line to stop execution. |
+| **`<F7>`** | **UI Toggle**: Manually open/close the Debugger UI. |
+
+---
+
+### 💡 Pro Tip
+When you start debugging a **C, C++, or Rust** project, Neovim will prompt you for the "Path to executable". Ensure you have compiled your code with debug symbols (using the `-g` flag in `gcc`/`clang` or running `cargo build` without the `--release` flag).
 
 However, installing through language-specific package managers (such as `go install` or `npm install`) ensures you get the latest version compatible with your projects.
