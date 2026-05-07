@@ -1,62 +1,59 @@
-local lspconfig = require("lspconfig")
-
--- ESLint config
-local eslint = {
-  lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
-  lintStdin = true,
-  lintFormats = {"%f:%l:%c: %m"},
-  lintIgnoreExitCode = true,
-  formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
-  formatStdin = true,
-}
-
-local function eslint_config_exists()
-  local files = {".eslintrc.js", ".eslintrc.json", ".eslintrc", "package.json"}
-  for _, file in ipairs(files) do
-    if vim.fn.filereadable(vim.fn.getcwd() .. "/" .. file) == 1 then
-      return true
-    end
-  end
-  return false
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+if pcall(require, "cmp_nvim_lsp") then
+    capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 end
 
-local function set_lsp_config(client)
-end
+vim.lsp.config("eslint", {
+    capabilities = capabilities,
+    root_dir = function(fname)
+        return vim.fs.root(fname, {
+            ".eslintrc", ".eslintrc.js", ".eslintrc.json", "package.json", ".git"
+        })
+    end,
+    on_attach = function(client, bufnr)
+        client.server_capabilities.completionProvider = nil
+        client.server_capabilities.hoverProvider = false
 
--- TSServer
-lspconfig.tsserver.setup {
-  on_attach = function(client)
-    client.server_capabilities.documentFormattingProvider = false
-    set_lsp_config(client)
-  end,
-}
+        local group = vim.api.nvim_create_augroup("EslintFix", { clear = true })
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            group = group,
+            buffer = bufnr,
+            command = "EslintFixAll",
+        })
+    end,
+})
 
--- EFM (lint + format)
-lspconfig.efm.setup {
-  on_attach = function(client)
-    client.server_capabilities.documentFormattingProvider = true
-    set_lsp_config(client)
-  end,
-  root_dir = function()
-    if not eslint_config_exists() then return nil end
-    return vim.fn.getcwd()
-  end,
-  settings = {
-    languages = {
-      javascript = { eslint },
-      javascriptreact = { eslint },
-      ["javascript.jsx"] = { eslint },
-      typescript = { eslint },
-      ["typescript.tsx"] = { eslint },
-      typescriptreact = { eslint },
+vim.lsp.config("ts_ls", {
+    cmd = { "typescript-language-server", "--stdio" },
+    capabilities = capabilities,
+    root_dir = function(fname)
+        return vim.fs.root(fname, {
+            "tsconfig.json", "jsconfig.json", "package.json", ".git"
+        })
+    end,
+    on_attach = function(client)
+        client.server_capabilities.documentFormattingProvider = false
+    end,
+    settings = {
+        typescript = {
+            inlayHints = {
+                includeInlayParameterNameHints = "all",
+                includeInlayFunctionParameterTypeHints = true,
+                includeInlayVariableTypeHints = true,
+                includeInlayPropertyDeclarationTypeHints = true,
+                includeInlayEnumMemberValueHints = true,
+            },
+        },
+        javascript = {
+            inlayHints = { includeInlayParameterNameHints = "all" },
+        },
     },
-  },
-  filetypes = {
-    "javascript",
-    "javascriptreact",
-    "javascript.jsx",
-    "typescript",
-    "typescript.tsx",
-    "typescriptreact",
-  },
-}
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    callback = function(args)
+        vim.lsp.enable("eslint", { bufnr = args.buf })
+        vim.lsp.enable("ts_ls", { bufnr = args.buf })
+    end,
+})
