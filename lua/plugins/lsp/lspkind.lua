@@ -32,5 +32,3 @@ lspkind.init({
 })
 
 return lspkind
-
-
