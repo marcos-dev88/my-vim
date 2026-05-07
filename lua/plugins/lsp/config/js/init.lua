@@ -1,62 +1,47 @@
-local lspconfig = require("lspconfig")
-
--- ESLint config
-local eslint = {
-  lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
-  lintStdin = true,
-  lintFormats = {"%f:%l:%c: %m"},
-  lintIgnoreExitCode = true,
-  formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
-  formatStdin = true,
-}
-
-local function eslint_config_exists()
-  local files = {".eslintrc.js", ".eslintrc.json", ".eslintrc", "package.json"}
-  for _, file in ipairs(files) do
-    if vim.fn.filereadable(vim.fn.getcwd() .. "/" .. file) == 1 then
-      return true
-    end
-  end
-  return false
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+if pcall(require, "cmp_nvim_lsp") then
+    capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 end
 
-local function set_lsp_config(client)
-end
-
--- TSServer
-lspconfig.tsserver.setup {
-  on_attach = function(client)
-    client.server_capabilities.documentFormattingProvider = false
-    set_lsp_config(client)
-  end,
-}
-
--- EFM (lint + format)
-lspconfig.efm.setup {
-  on_attach = function(client)
-    client.server_capabilities.documentFormattingProvider = true
-    set_lsp_config(client)
-  end,
-  root_dir = function()
-    if not eslint_config_exists() then return nil end
-    return vim.fn.getcwd()
-  end,
-  settings = {
-    languages = {
-      javascript = { eslint },
-      javascriptreact = { eslint },
-      ["javascript.jsx"] = { eslint },
-      typescript = { eslint },
-      ["typescript.tsx"] = { eslint },
-      typescriptreact = { eslint },
+vim.lsp.config("vtsls", {
+    install = {
+        cmd = { "vtsls", "--stdio" },
     },
-  },
-  filetypes = {
-    "javascript",
-    "javascriptreact",
-    "javascript.jsx",
-    "typescript",
-    "typescript.tsx",
-    "typescriptreact",
-  },
-}
+    default_config = {
+        cmd = { "vtsls", "--stdio" },
+        capabilities = capabilities,
+        root_dir = function(fname)
+            return vim.fs.root(fname, { "tsconfig.json", "jsconfig.json", "package.json", ".git" })
+        end,
+        settings = {
+            vtsls = {
+                autoUseWorkspaceTsdk = true,
+                experimental = { completion = { enableServerSideFuzzyMatch = true } },
+            },
+            typescript = {
+                updateImportsOnFileMove = { enabled = "always" },
+                suggest = { completeFunctionCalls = true },
+                inlayHints = {
+                    parameterNames = { enabled = "all" },
+                    parameterTypes = { enabled = true },
+                    variableTypes = { enabled = true },
+                    functionLikeReturnTypes = { enabled = true },
+                },
+            },
+        },
+        on_attach = function(client, bufnr)
+            client.server_capabilities.documentFormattingProvider = false
+            
+            if client.server_capabilities.inlayHintProvider then
+                vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+            end
+        end,
+    }
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    callback = function(args)
+        vim.lsp.enable("vtsls") 
+    end,
+})

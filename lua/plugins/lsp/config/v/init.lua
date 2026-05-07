@@ -1,18 +1,29 @@
-nvim_lsp = require "lspconfig"
+local home_dir = os.getenv("HOME") or ""
 
-local home_dir = os.getenv("HOME")
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+  pattern = "*.v",
+  callback = function()
+    vim.bo.filetype = "vlang"
+  end,
+})
 
-vim.cmd([[au BufNewFile,BufRead *.v set filetype=vlang]])
+vim.lsp.config("vls", {
+  cmd = { home_dir .. "/.vls/bin/vls_linux_x64", "--socket" },
 
-nvim_lsp.vls.setup{
-    cmd = { home_dir..".vls/bin/vls_linux_x64", "--socket" },
-    -- settings = {
-    --   vls = {
-    --     analyses = {
-    --       unusedparams = true,
-    --     },
-    --     staticcheck = true,
-    --   },
-    -- },
-}
+  root_dir = function(fname)
+    return vim.fs.root(fname, {
+      "v.mod",
+      ".git",
+    })
+  end,
+  
+  capabilities = capabilities,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "vlang",
+  callback = function(args)
+    vim.lsp.enable("vls", { bufnr = args.buf })
+  end,
+})
 

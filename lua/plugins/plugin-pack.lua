@@ -40,9 +40,7 @@ return require('packer').startup(function(use)
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
     }
-    use 'nvim-treesitter/nvim-treesitter-refactor'
-    use 'nvim-treesitter/playground'
-    use 'SirVer/ultisnips'
+    --use 'SirVer/ultisnips'
     use 'lewis6991/gitsigns.nvim'
     use 'akinsho/git-conflict.nvim'
     use 'nvim-tree/nvim-web-devicons'
@@ -61,7 +59,8 @@ return require('packer').startup(function(use)
         'nvim-tree/nvim-tree.lua',
         requires = { 'nvim-tree/nvim-web-devicons' },
     }
-    use 'neovim/nvim-lspconfig'
+    --use { "TabbyML/vim-tabby", config = function() vim.g.tabby_server_url = "http://localhost:5262" end }
+    use "neovim/nvim-lspconfig"
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-nvim-lsp'
     use 'hrsh7th/cmp-buffer'
@@ -71,11 +70,7 @@ return require('packer').startup(function(use)
     use 'L3MON4D3/LuaSnip'
     use 'rafamadriz/friendly-snippets'
     use 'ray-x/lsp_signature.nvim'
-    use {
-        'tzachar/cmp-tabnine',
-        run = './install.sh',
-        requires = 'hrsh7th/nvim-cmp'
-    }
+    -- use { 'tzachar/cmp-tabnine', run = './install.sh', requires = 'hrsh7th/nvim-cmp' }
     use 'onsails/lspkind-nvim'
     use 'VidocqH/lsp-lens.nvim'
     use 'simrat39/rust-tools.nvim'
@@ -92,7 +87,9 @@ return require('packer').startup(function(use)
     }
 
     if packer_bootstrap then
+        vim.cmd("autocmd User PackerComplete ++once lua print('Packer ready')")
         require('packer').sync()
+        return
     end
 end)
 
