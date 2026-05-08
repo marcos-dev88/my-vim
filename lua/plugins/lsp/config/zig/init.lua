@@ -1,34 +1,30 @@
 local home_dir = os.getenv("HOME")
+local zls_bin_custom = home_dir .. "/zig/tools/zls/zig-out/bin/zls"
 
-vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  pattern = "*.zig",
-  callback = function()
-    vim.bo.filetype = "zig"
-  end,
-})
+local function get_zls_bin()
+    if vim.fn.executable(zls_bin_custom) == 1 then
+        return zls_bin_custom
+    end
+    return "zls" 
+end
 
 vim.lsp.config("zls", {
-  cmd = { home_dir .. "/zig/tools/zls/zig-out/bin/zls" },
-
-  -- O root_dir agora usando a API robusta do 0.12
-  root_dir = function(fname)
-    return vim.fs.root(fname, {
-      "build.zig",
-      "zls.json",
-      ".git",
-    })
-  end,
-
-  capabilities = capabilities,
-
-  on_attach = function(client, bufnr)
-    client.server_capabilities.documentFormattingProvider = true
-  end,
+    cmd = { get_zls_bin() },
+    root_dir = vim.fs.root(0, { "build.zig", ".git" }),
+    capabilities = zig_caps or vim.lsp.protocol.make_client_capabilities(),
+    on_attach = function(client, bufnr)
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            buffer = bufnr,
+            callback = function()
+                vim.lsp.buf.format({ bufnr = bufnr, async = false })
+            end,
+        })
+    end,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "zig",
-  callback = function(args)
-    vim.lsp.enable("zls", { bufnr = args.buf })
-  end,
+    pattern = "zig",
+    callback = function(args)
+        vim.lsp.enable("zls", { bufnr = args.buf })
+    end,
 })
