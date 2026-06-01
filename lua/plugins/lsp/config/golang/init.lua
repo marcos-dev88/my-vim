@@ -1,20 +1,14 @@
 vim.lsp.config("gopls", {
   cmd = { "gopls" },
 
-  root_dir = function(fname)
-    return vim.fs.root(fname, {
-      "go.mod",
-      "go.work",
-      ".git",
-    })
-  end,
-
   settings = {
     gopls = {
       analyses = {
         unusedparams = true,
       },
+
       staticcheck = true,
+
       hints = {
         assignVariableTypes = true,
         compositeLiteralFields = true,
@@ -25,24 +19,30 @@ vim.lsp.config("gopls", {
       },
     },
   },
-
-  on_attach = function(client, bufnr)
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = bufnr,
-      callback = function()
-        vim.lsp.buf.code_action({
-          context = { only = { "source.organizeImports" } },
-          apply = true,
-        })
-        vim.lsp.buf.format({ async = false })
-      end,
-    })
-  end,
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "go", "gomod", "gowork", "gotmpl" },
+vim.lsp.enable("gopls")
+
+vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
-    vim.lsp.enable("gopls", { bufnr = args.buf })
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+    if client and client.name == "gopls" then
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        buffer = args.buf,
+        callback = function()
+          vim.lsp.buf.code_action({
+            context = {
+              only = { "source.organizeImports" },
+            },
+            apply = true,
+          })
+
+          vim.lsp.buf.format({
+            async = false,
+          })
+        end,
+      })
+    end
   end,
 })

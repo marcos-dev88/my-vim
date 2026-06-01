@@ -1,4 +1,4 @@
-local dashboard = {}
+local dashboard = require("dashboard")
 
 dashboard.settings = {
     shortcuts = {

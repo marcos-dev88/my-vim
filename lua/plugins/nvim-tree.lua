@@ -1,24 +1,53 @@
-local ok, nt = pcall(require, 'nvim-tree')
-if not ok then
-  return
-end
+local nvim_tree = require("nvim-tree")
 
-local keymap = vim.api.nvim_set_keymap
-local noremap_opts = { noremap = true }
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
-local view_setup = { 
+vim.keymap.set(
+  "n",
+  "<leader>e",
+  "<cmd>NvimTreeToggle<CR>",
+  { desc = "Toggle file tree" }
+)
+
+nvim_tree.setup({
+  auto_reload_on_write = true,
+  disable_netrw = true,
+
+  hijack_cursor = false,
+  hijack_netrw = false,
+  hijack_unnamed_buffer_when_opening = false,
+
+  sort_by = "name",
+
+  root_dirs = {},
+  prefer_startup_root = false,
+  sync_root_with_cwd = false,
+  reload_on_bufenter = false,
+  respect_buf_cwd = false,
+
+  on_attach = "default",
+  select_prompts = false,
+
+  view = {
     centralize_selection = false,
     cursorline = true,
     debounce_delay = 15,
+
     width = 30,
     side = "left",
+
     preserve_window_proportions = true,
+
     number = false,
     relativenumber = false,
-    signcolumn = "yes", 
+
+    signcolumn = "yes",
+
     float = {
       enable = false,
       quit_on_focus_loss = true,
+
       open_win_config = {
         relative = "editor",
         border = "rounded",
@@ -28,20 +57,24 @@ local view_setup = {
         col = 1,
       },
     },
-}
+  },
 
-local renderer_setup = {
+  renderer = {
     add_trailing = false,
     group_empty = false,
     highlight_git = true,
+
     full_name = false,
     highlight_opened_files = "none",
     highlight_modified = "all",
+
     root_folder_label = ":~:s?$?/..?",
     indent_width = 2,
+
     indent_markers = {
       enable = false,
       inline_arrows = true,
+
       icons = {
         corner = "└",
         edge = "│",
@@ -50,12 +83,16 @@ local renderer_setup = {
         none = " ",
       },
     },
+
     icons = {
       webdev_colors = true,
+
       git_placement = "before",
       modified_placement = "after",
+
       padding = " ",
       symlink_arrow = " ➛ ",
+
       show = {
         file = true,
         folder = true,
@@ -63,11 +100,13 @@ local renderer_setup = {
         git = true,
         modified = true,
       },
+
       glyphs = {
         default = "",
         symlink = "",
         bookmark = "",
         modified = "●",
+
         folder = {
           arrow_closed = "",
           arrow_open = "",
@@ -78,6 +117,7 @@ local renderer_setup = {
           symlink = "󱉆",
           symlink_open = "󱉆",
         },
+
         git = {
           unstaged = "⇅",
           staged = "✓",
@@ -89,60 +129,39 @@ local renderer_setup = {
         },
       },
     },
-    special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
+
+    special_files = {
+      "Cargo.toml",
+      "Makefile",
+      "README.md",
+      "readme.md",
+    },
+
     symlink_destination = true,
-}
+  },
 
- local git_config = {
-    enable = true,
-    ignore = false,
-    show_on_dirs = true,
-    show_on_open_dirs = true,
-    timeout = 500,
-}
-
-keymap('n', '<leader>e', ':NvimTreeToggle<CR>', noremap_opts)
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-
-local config = { 
-  auto_reload_on_write = true,
-  disable_netrw = true,
-  hijack_cursor = false,
-  hijack_netrw = false,
-  hijack_unnamed_buffer_when_opening = false,
-  sort_by = "name",
-  root_dirs = {},
-  prefer_startup_root = false,
-  sync_root_with_cwd = false,
-  reload_on_bufenter = false,
-  respect_buf_cwd = false,
-  on_attach = "default",
-  select_prompts = false,
-  view = view_setup,
-  renderer = renderer_setup,
   hijack_directories = {
     enable = true,
     auto_open = true,
   },
+
   update_focused_file = {
     enable = true,
     update_root = false,
     ignore_list = {},
   },
-  system_open = {
-    cmd = "",
-    args = {},
-  },
+
   diagnostics = {
     enable = true,
     show_on_dirs = false,
     show_on_open_dirs = true,
     debounce_delay = 50,
+
     severity = {
       min = vim.diagnostic.severity.HINT,
       max = vim.diagnostic.severity.ERROR,
     },
+
     icons = {
       hint = " ",
       info = " ",
@@ -150,6 +169,7 @@ local config = {
       error = " ",
     },
   },
+
   filters = {
     dotfiles = false,
     git_clean = false,
@@ -157,28 +177,41 @@ local config = {
     custom = {},
     exclude = {},
   },
+
   filesystem_watchers = {
     enable = true,
     debounce_delay = 50,
     ignore_dirs = {},
   },
-  git = git_config,
+
+  git = {
+    enable = true,
+    ignore = false,
+    show_on_dirs = true,
+    show_on_open_dirs = true,
+    timeout = 500,
+  },
+
   modified = {
     enable = true,
     show_on_dirs = true,
     show_on_open_dirs = true,
   },
+
   actions = {
     use_system_clipboard = true,
+
     change_dir = {
       enable = true,
       global = false,
       restrict_above_cwd = false,
     },
+
     expand_all = {
       max_folder_discovery = 300,
       exclude = {},
     },
+
     file_popup = {
       open_win_config = {
         col = 1,
@@ -188,30 +221,49 @@ local config = {
         style = "minimal",
       },
     },
+
     open_file = {
-      quit_on_open = false, -- check this later
+      quit_on_open = false,
       resize_window = true,
+
       window_picker = {
         enable = true,
         picker = "default",
         chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
+
         exclude = {
-          filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
-          buftype = { "nofile", "terminal", "help" },
+          filetype = {
+            "notify",
+            "packer",
+            "qf",
+            "diff",
+            "fugitive",
+            "fugitiveblame",
+          },
+
+          buftype = {
+            "nofile",
+            "terminal",
+            "help",
+          },
         },
       },
     },
+
     remove_file = {
       close_window = true,
     },
   },
+
   trash = {
     cmd = "gio trash",
   },
+
   live_filter = {
     prefix = "[FILTER]: ",
     always_show_folders = true,
   },
+
   tab = {
     sync = {
       open = false,
@@ -219,23 +271,28 @@ local config = {
       ignore = {},
     },
   },
+
   notify = {
     threshold = vim.log.levels.INFO,
   },
+
   ui = {
     confirm = {
       remove = true,
       trash = true,
     },
   },
+
   experimental = {
     git = {
       async = true,
     },
   },
+
   log = {
     enable = false,
     truncate = false,
+
     types = {
       all = false,
       config = false,
@@ -247,6 +304,4 @@ local config = {
       watcher = false,
     },
   },
-}
-
-nt.setup(config)
+})

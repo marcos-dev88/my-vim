@@ -1,40 +1,67 @@
-local ok, gc = pcall(require, "git-conflict")
-if not ok then
-    return
-end
+local git_conflict = require("git-conflict")
 
-local keymap = vim.api.nvim_set_keymap
-local noremap_opts = { noremap = true }
-local cmd = vim.cmd
-
-cmd([[
-    highlight conflictIncoming ctermbg=red ctermfg=black
-    highlight conflictCurrent ctermbg=blue ctermfg=black
-]])
-
-gc.setup{ 
-    default_mappings = false,
-    disable_diagnostics = false,
-    highlights = { 
-        incoming = 'conflictIncoming',
-        current = 'conflictCurrent',
-    }
-}
-
-vim.api.nvim_create_autocmd('User', { 
-    pattern = 'GitConflictDetected',
-    callback = function()
-        vim.notify('Conflict detected in'..vim.fn.expand('<afile>'))
-        vim.keymap.set('n', 'cww', function()
-            engage.conflict_buster()
-            create_buffer_local_mappings()
-        end)
-    end
+vim.api.nvim_set_hl(0, "ConflictIncoming", {
+  bg = "red",
+  fg = "black",
 })
 
-keymap('n', 'co', '<cmd>GitConflictChooseOurs<CR>', noremap_opts)
-keymap('n', 'ct', '<cmd>GitConflictChooseTheirs<CR>', noremap_opts)
-keymap('n', 'cb', '<cmd>GitConflictChooseBoth<CR>', noremap_opts)
-keymap('n', 'c0', '<cmd>GitConflictChooseNone<CR>', noremap_opts)
-keymap('n', ']x', '<cmd>GitConflictNextConflict<CR>', noremap_opts)
-keymap('n', '[x', '<cmd>GitConflictPrevConflict<CR>', noremap_opts)
+vim.api.nvim_set_hl(0, "ConflictCurrent", {
+  bg = "blue",
+  fg = "black",
+})
+
+git_conflict.setup({
+  default_mappings = false,
+  disable_diagnostics = false,
+
+  highlights = {
+    incoming = "ConflictIncoming",
+    current = "ConflictCurrent",
+  },
+})
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "GitConflictDetected",
+
+  callback = function()
+    vim.notify(
+      "Conflict detected in " .. vim.fn.expand("<afile>")
+    )
+  end,
+})
+
+vim.keymap.set(
+  "n",
+  "co",
+  "<cmd>GitConflictChooseOurs<CR>"
+)
+
+vim.keymap.set(
+  "n",
+  "ct",
+  "<cmd>GitConflictChooseTheirs<CR>"
+)
+
+vim.keymap.set(
+  "n",
+  "cb",
+  "<cmd>GitConflictChooseBoth<CR>"
+)
+
+vim.keymap.set(
+  "n",
+  "c0",
+  "<cmd>GitConflictChooseNone<CR>"
+)
+
+vim.keymap.set(
+  "n",
+  "]x",
+  "<cmd>GitConflictNextConflict<CR>"
+)
+
+vim.keymap.set(
+  "n",
+  "[x",
+  "<cmd>GitConflictPrevConflict<CR>"
+)

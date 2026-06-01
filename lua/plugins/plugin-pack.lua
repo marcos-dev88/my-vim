@@ -10,44 +10,101 @@ if fn.empty(fn.glob(install_path)) > 0 then
   cmd('packadd packer.nvim')
 end
 
--- Config global
+-- Força o Packer a recompilar o cache automaticamente sempre que você salvar este arquivo
+cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugin-pack.lua source <afile> | PackerCompile
+  augroup END
+]])
+
 vim.g.rustfmt_autosave = 1
 
 return require('packer').startup(function(use)
-    use 'vim-airline/vim-airline'
-    use 'vim-airline/vim-airline-themes'
+    use "vim-airline/vim-airline"
+    use {
+      "vim-airline/vim-airline-themes",
+
+      after = "vim-airline",
+
+      config = function()
+        require("plugins.vim-airline-themes")
+      end,
+    }
+
     use 'ryanoasis/vim-devicons'
     use 'tribela/vim-transparent'
+
     use {
-        'nvim-telescope/telescope.nvim',
-        requires = { 
-            'nvim-lua/plenary.nvim',
-            'nvim-telescope/telescope-live-grep-args.nvim',
-        },
-        config = function()
-            require('telescope').load_extension('live_grep_args')
-        end
+      "nvim-telescope/telescope.nvim",
+
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope-live-grep-args.nvim",
+      },
+
+      config = function()
+        require("plugins.telescope")
+      end,
     }
-    use 'tpope/vim-commentary'
+
+    use {
+      "tpope/vim-commentary",
+
+      config = function()
+        require("plugins.vim-commentary")
+      end,
+    }
+
     use 'mkitt/tabline.vim'
     use 'Xuyuanp/nerdtree-git-plugin'
     use 'ludovicchabant/vim-gutentags'
+
+    --use {
+     --   'fatih/vim-go', 
+      --  run = ':GoUpdateBinaries'
+    --}
+
     use {
-        'fatih/vim-go', 
-        run = ':GoUpdateBinaries'
+      "nvim-treesitter/nvim-treesitter",
+      run = ":TSUpdate",
+
+      config = function()
+        require("plugins.nvim-treesitter")
+      end,
     }
-    use {
-        'nvim-treesitter/nvim-treesitter',
-        run = ':TSUpdate'
-    }
+        
     --use 'SirVer/ultisnips'
-    use 'lewis6991/gitsigns.nvim'
-    use 'akinsho/git-conflict.nvim'
-    use 'nvim-tree/nvim-web-devicons'
     use {
-        'glepnir/dashboard-nvim',
-        requires = { 'nvim-tree/nvim-web-devicons' },
+      "lewis6991/gitsigns.nvim",
+
+      config = function()
+        require("plugins.gitsigns")
+      end,
     }
+
+    use {
+      "akinsho/git-conflict.nvim",
+
+      config = function()
+        require("plugins.git-conflict")
+      end,
+    }
+
+    use 'nvim-tree/nvim-web-devicons'
+
+    use {
+      "glepnir/dashboard-nvim",
+
+      requires = {
+        "nvim-tree/nvim-web-devicons",
+      },
+
+      config = function()
+        require("plugins.dashboard-nvim")
+      end,
+    }
+
     use 'navarasu/onedark.nvim'
     use { 'catppuccin/nvim', as = 'catppuccin' }
     use 'rebelot/kanagawa.nvim'
@@ -55,10 +112,19 @@ return require('packer').startup(function(use)
         'ViViDboarder/wombat.nvim',
         requires = { 'rktjmp/lush.nvim' }
     }
+
     use {
-        'nvim-tree/nvim-tree.lua',
-        requires = { 'nvim-tree/nvim-web-devicons' },
+      "nvim-tree/nvim-tree.lua",
+
+      requires = {
+        "nvim-tree/nvim-web-devicons",
+      },
+
+      config = function()
+        require("plugins.nvim-tree")
+      end,
     }
+     
     --use { "TabbyML/vim-tabby", config = function() vim.g.tabby_server_url = "http://localhost:5262" end }
     use "neovim/nvim-lspconfig"
     use 'hrsh7th/nvim-cmp'
@@ -76,14 +142,20 @@ return require('packer').startup(function(use)
     use 'simrat39/rust-tools.nvim'
     use 'rust-lang/rust.vim'
     use 'mfussenegger/nvim-jdtls'
+
     use {
-        'mfussenegger/nvim-dap',
-        requires = {
-            'rcarriga/nvim-dap-ui',
-            'williamboman/mason.nvim',
-            'jay-babu/mason-nvim-dap.nvim',
-            'leoluz/nvim-dap-go',
-        },
+      "mfussenegger/nvim-dap",
+
+      requires = {
+        "rcarriga/nvim-dap-ui",
+        "williamboman/mason.nvim",
+        "jay-babu/mason-nvim-dap.nvim",
+        "leoluz/nvim-dap-go",
+      },
+
+      config = function()
+        require("plugins.dap")
+      end,
     }
 
     if packer_bootstrap then

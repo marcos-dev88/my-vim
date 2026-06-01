@@ -1,7 +1,5 @@
-local cmd = vim.cmd
+vim.g.airline_theme = "owo"
 
-cmd([[
-    let g:airline_theme='owo'
-    let g:airline#extension#tabline#enabled = 1
-    let g:airline_powerline_fonts = 1
-]])
+vim.g.airline_powerline_fonts = 1
+
+vim.g["airline#extensions#tabline#enabled"] = 1

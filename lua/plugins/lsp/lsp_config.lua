@@ -146,7 +146,7 @@ cmp.setup({
 -- snippets
 require("luasnip.loaders.from_vscode").lazy_load()
 
--- format on save (corrigido)
+-- format on save (fixed)
 vim.api.nvim_create_autocmd("BufWritePre", {
   callback = function(args)
     local clients = vim.lsp.get_clients({
@@ -175,5 +175,5 @@ require("plugins.lsp.config.js")
 require("plugins.lsp.config.flutter")
 require("plugins.lsp.config.python")
 require("plugins.lsp.config.zig")
-require "plugins.lsp.config.v"
+require("plugins.lsp.config.v")
 
